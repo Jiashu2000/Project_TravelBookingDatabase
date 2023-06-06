@@ -1,0 +1,153 @@
+/*
+ * 
+ * IMT 563 Project Relational Model Source DDL
+ * Team 8
+ * 
+*/
+
+-- CREATE DATABASE QICC
+
+USE QICC
+
+CREATE SCHEMA SRC
+
+-- Load Table In SRC
+
+DROP TABLE SRC.[User]
+
+CREATE TABLE SRC.[User] (
+    FirstName VARCHAR(50) NOT NULL,
+    LastName VARCHAR(50) NOT NULL,
+    Age INT NOT NULL,
+    TS DATETIME DEFAULT CURRENT_TIMESTAMP
+)
+
+SELECT COUNT(*) FROM SRC.[User]
+
+
+
+DROP TABLE SRC.Airline
+
+CREATE TABLE SRC.Airline (
+    AirlineName VARCHAR(150) NOT NULL,
+    Alias VARCHAR(50),
+    IATA VARCHAR(30),
+    ICAO VARCHAR(30),
+    Active TINYINT NOT NULL,
+    TS DATETIME DEFAULT CURRENT_TIMESTAMP
+)
+
+SELECT COUNT(*) FROM SRC.Airline
+
+
+
+DROP TABLE SRC.Airport
+
+CREATE TABLE SRC.Airport (
+    AirportName VARCHAR(100) NOT NULL,
+    AirportCityName VARCHAR(100) NOT NULL,
+    AirportCountryName VARCHAR(100) NOT NULL,
+    IATA VARCHAR(10),
+    ICAO VARCHAR(10),
+    Latitude FLOAT NOT NULL,
+    Longitude FLOAT NOT NULL,
+    Altitude FLOAT NOT NULL,
+    TS DATETIME DEFAULT CURRENT_TIMESTAMP
+)
+
+
+
+DROP TABLE SRC.Country
+
+CREATE TABLE SRC.Country (
+    CountryName VARCHAR(50) NOT NULL,
+    IsoCode VARCHAR(20),
+    TS DATETIME DEFAULT CURRENT_TIMESTAMP
+)
+
+
+
+DROP TABLE SRC.City
+
+CREATE TABLE SRC.City (
+    CityName VARCHAR(100) NOT NULL,
+    CountryName VARCHAR(100) NOT NULL,
+    TS DATETIME DEFAULT CURRENT_TIMESTAMP
+)
+
+
+
+DROP TABLE SRC.Plane 
+
+CREATE TABLE SRC.Plane (
+    PlaneName VARCHAR(100) NOT NULL,
+    IATA VARCHAR(30),
+    ICAO VARCHAR(30),
+    TS DATETIME DEFAULT CURRENT_TIMESTAMP
+)
+
+
+
+DROP TABLE SRC.Route
+
+CREATE TABLE SRC.Route (
+    AirlineIATA VARCHAR(30) NOT NULL,
+    OriginAirportIATA VARCHAR(30) NOT NULL,
+    DestinationAirportIATA VARCHAR(30) NOT NULL,
+    Stops INT NOT NULL,
+    AirCraftIATA VARCHAR(30) NOT NULL,
+    TS DATETIME DEFAULT CURRENT_TIMESTAMP
+)
+
+
+
+DROP TABLE SRC.Rating
+
+CREATE TABLE SRC.Rating (
+	FlightID INT NOT NULL,
+    WifiService INT NOT NULL,
+    DepArrTimeConvenience INT NOT NULL,
+    EaseofOnlineBooking INT NOT NULL,
+    GateLocation INT NOT NULL,
+    FoodDrink INT NOT NULL, 
+    EaseofOnlineBoarding INT NOT NULL,
+    SeatComfort INT NOT NULL,
+    InflightEntertainment INT NOT NULL,
+    OnboardService INT NOT NULL,
+    LegroomService INT NOT NULL,
+    BaggageHandling INT NOT NULL,
+    CheckinService INT NOT NULL,
+    InflightService INT NOT NULL,
+    Cleanliness INT NOT NULL,
+    Satisfaction INT NOT NULL,
+    TS DATETIME DEFAULT CURRENT_TIMESTAMP
+)
+
+
+
+DROP TABLE SRC.Flight
+
+CREATE TABLE SRC.Flight (
+	UserID INT NOT NULL,
+	CarrierIATA VARCHAR(30) NOT NULL,
+	FlightNumber INT NOT NULL,
+	FlightDate DATETIME NOT NULL,
+    OriginAirport VARCHAR(30) NOT NULL,
+	OriginCityName VARCHAR(100) NOT NULL,
+	DestinationAirport VARCHAR(30) NOT NULL,
+	DestinationCityName VARCHAR(100) NOT NULL,
+	ScheduledDepTime INT NOT NULL,
+	ActualDepTime INT NOT NULL, 
+	DepDelay INT NOT NULL,
+    ScheduledArrTime INT NOT NULL,
+    ActualArrTime INT NOT NULL,
+    ArrDelay INT NOT NULL, 
+    Cancelled INT NOT NULL,
+    AirTime INT NOT NULL,
+    Distance INT NOT NULL,
+    TravelTypeID INT NOT NULL,
+    CabinClassID INT NOT NULL,
+    TS DATETIME DEFAULT CURRENT_TIMESTAMP
+)
+
+SELECT COUNT(*) FROM SRC.FLIGHT
